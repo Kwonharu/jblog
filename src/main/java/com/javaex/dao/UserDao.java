@@ -14,6 +14,7 @@ public class UserDao {
 	
 	//등록
 	public int insertUser(UserVo userVo) {
+		System.out.println("UserDao.insertUser()");
 		
 		int count = sqlSession.insert("user.insertUser", userVo);
 		//System.out.println(count);
@@ -23,6 +24,7 @@ public class UserDao {
 	
 	//1명
 	public UserVo selectOneUser(UserVo userVo) {
+		System.out.println("UserDao.selectOneUser()");
 		
 		UserVo authUser = sqlSession.selectOne("user.selectOneUser", userVo);
 		

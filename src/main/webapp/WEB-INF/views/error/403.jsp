@@ -4,14 +4,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
 <title>JBlog</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/jblog.css">
+
 </head>
 <body>
-	<div class="center-content">
+	<div id="center-content">
 		
-		<!-- 메인해더 -->
+		<!--메인 해더 자리 -->
 		<c:import url="/WEB-INF/views/includes/main-header.jsp"></c:import>
 		
 		<h1>잘못된 접근입니다.</h1>

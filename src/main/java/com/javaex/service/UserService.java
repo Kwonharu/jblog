@@ -14,6 +14,7 @@ public class UserService {
 	
 	//회원가입
 	public int userInsert(UserVo userVo) {
+		System.out.println("UserService.userInsert()");
 		
 		int count = userDao.insertUser(userVo);
 		
@@ -22,6 +23,7 @@ public class UserService {
 	
 	//1명 가져오기
 	public UserVo oneUserSelect(UserVo userVo) {
+		System.out.println("UserService.oneUserSelect()");
 		
 		UserVo authUser = userDao.selectOneUser(userVo);
 		
