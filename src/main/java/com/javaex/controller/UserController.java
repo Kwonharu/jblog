@@ -34,7 +34,6 @@ public class UserController{
 		//System.out.println(userVo);
 		userService.userInsert(userVo);
 		
-		
 		return "user/joinSuccess";
 	}
 	
@@ -71,8 +70,6 @@ public class UserController{
 		
 		return "redirect:/";
 	}
-	
-	
 	
 	
 }
