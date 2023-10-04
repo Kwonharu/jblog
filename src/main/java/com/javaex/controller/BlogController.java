@@ -17,7 +17,7 @@ public class BlogController {
 	private BlogService blogService;
 	
 	@RequestMapping(value="/{id}", method={RequestMethod.GET, RequestMethod.POST})
-	public String blog(@PathVariable("id") String id, Model model){
+	public String blog(@PathVariable(value="id") String id, Model model){
 		System.out.println("BlogController.blog()");
 		
 		UserVo userVo = blogService.getOneUser(id);

@@ -14,6 +14,7 @@ public class BlogService {
 	
 	
 	public UserVo getOneUser(String id) {
+		System.out.println("BlogService.getOneUser()");
 		
 		UserVo userVo = blogDao.selectOneUser(id);
 		

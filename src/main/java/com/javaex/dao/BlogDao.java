@@ -14,6 +14,7 @@ public class BlogDao {
 	
 	
 	public UserVo selectOneUser(String id) {
+		System.out.println("BlogDao.selectOneUser()");
 		
 		UserVo userVo = sqlSession.selectOne("blog.selectOneUser", id);
 		
