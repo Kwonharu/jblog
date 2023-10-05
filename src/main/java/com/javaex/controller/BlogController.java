@@ -7,11 +7,15 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.javaex.service.BlogService;
+import com.javaex.vo.BlogVo;
 import com.javaex.vo.UserVo;
 
 @Controller
@@ -84,13 +88,28 @@ public class BlogController {
 	
 	//기본설정변경
 	@RequestMapping(value="/{id}/admin/basicUpdate", method={RequestMethod.GET, RequestMethod.POST})
-	public String basicUpdate(@PathVariable(value="id") String id, Model model, HttpSession session){
+	public String basicUpdate(@PathVariable(value="id") String id, 
+							  @ModelAttribute BlogVo blogVo,
+							  @RequestParam(value="file") MultipartFile file,
+							  HttpSession session){
 		System.out.println("BlogController.basicUpdate()");
 
-		
+		//로그인 했는지 확인
+		if(session.getAttribute("authUser") == null) {
+			return "redirect:/user/loginForm";
+		//파라미터 id가 세션의 id와 같다면
+		}else if((id.equals(((UserVo) session.getAttribute("authUser")).getId()))){
+			
+			String blogId = ((UserVo) session.getAttribute("authUser")).getId();
+			String blogTitle = blogVo.getBlogTitle();
 
-		
-		return "redirect:/{id}";
+			blogService.blogUpdateBasic(blogId, blogTitle, file);
+			
+			return "redirect:/{id}";
+		//나가
+		}else {
+			return "error/403";
+		}
 	}
 	
 		

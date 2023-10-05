@@ -31,6 +31,13 @@ public class BlogDao {
 		return blogVo;
 	}
 	
+	//기본 설정 업데이트
+	public int updateBlogBasic(BlogVo BlogVo) {
+		System.out.println("BlogDao.updateBlogBasic()");
+		
+		return sqlSession.update("blog.updateBlogBasic", BlogVo);
+	}
+	
 }
 
 

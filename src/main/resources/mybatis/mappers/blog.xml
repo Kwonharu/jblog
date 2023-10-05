@@ -6,10 +6,11 @@
 	<insert id="insertBlogTitle" parameterType="com.javaex.vo.UserVo">
 		<![CDATA[
 			insert into blog
-			values(#{id}, #{userName} || '의 블로그입니다.', '/assets/images/spring-logo.jpg')
+			values(#{id}, #{userName} || '의 블로그입니다.', 'spring-logo.jpg')
 		]]>
 	</insert>
 
+	<!-- id로 블로그 찾기-화면 출력용 -->
 	<select id="selectOneBlogWithId" parameterType="String" resultType="com.javaex.vo.BlogVo">
 		<![CDATA[
 			select  id,
@@ -19,7 +20,16 @@
 			where id = #{id}
 		]]>
 	</select>
-
+	
+	<!-- 블로그 기본 업데이트 -->
+	<update id="updateBlogBasic" parameterType="com.javaex.vo.BlogVo">
+		<![CDATA[
+			update blog
+			set blogTitle = #{blogTitle},
+			    logoFile = #{logoFile}
+			where id = #{id}
+		]]>
+	</update>
 
 </mapper>
 
