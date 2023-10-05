@@ -22,12 +22,12 @@
 				<div id="profile">
 					
 					<!-- 기본이미지 -->
-					<img id="proImg" src="${pageContext.request.contextPath}/assets/images/spring-logo.jpg">
+					<img id="proImg" src="${pageContext.request.contextPath}${requestScope.blogmap.blogVo.logoFile}">
 					
 					<!-- 사용자업로드 이미지 -->
 					<%-- <img id="proImg" src=""> --%>
 					
-					<div id="nick">${requestScope.userVo.userName}(${requestScope.userVo.id})님</div>
+					<div id="nick">${requestScope.blogmap.userVo.userName}(${requestScope.blogmap.userVo.id})님</div>
 				</div>
 				<div id="cate">
 					<div class="text-left">
@@ -51,15 +51,32 @@
 				<div id="postBox" class="clearfix">
 						<div id="postTitle" class="text-left"><strong>08.페이징</strong></div>
 						<div id="postDate" class="text-left"><strong>2020/07/23</strong></div>
-						<div id="postNick">${requestScope.userVo.userName}(${requestScope.userVo.id})님</div>
+						<div id="postNick">${requestScope.blogmap.userVo.userName}(${requestScope.blogmap.userVo.id})님</div>
 				</div>
 				<!-- //postBox -->
 			
-				<div id="post" >
-					대통령은 법률이 정하는 바에 의하여 사면·감형 또는 복권을 명할 수 있다. 
-					대통령의 임기는 5년으로 하며, 중임할 수 없다. 법관은 탄핵 또는 금고 이상의 
-					형의 선고에 의하지 아니하고는 파면되지 아니하며, 징계처분에 의하지 아니하고는 
-					정직·감봉 기타 불리한 처분을 받지 아니한다.
+				<div id="post" style="white-space:pre">
+					청명한 달빛 그득한 죽림 어딘가
+					오색 빛 나비 안내한 오솔길 따라
+					나는 가만히 침소에 든 그댈 보아요
+					꿈결에 아득한 꿈결에
+					이른 서리 아침에 잠에서 깨어
+					문득 목 놓아 울고 말았죠
+					사무치게 보고 싶은 그대 그리며
+					
+					계속 모른척할 건가요
+					결국 난 못 참고 토라져
+					소녀는 원래 복잡 한 거죠
+					수줍어도 대담할 땐 꺄~~~?!
+					
+					부디 이 마음 알아채지 말아 주세요
+					진짜 진짜 정말 정말 보고팠어요
+					밝은 달 아래서 정화수 떠 놓고 빌었다죠
+					그댈 감쪽같이 속여요 전부
+					여우처럼 숨길 거예요
+					욕심 많고 거짓뿐인 소녀의 꿈은
+					다 그런 법이죠
+					모른 체해줘요
 				</div>
 				<!-- //post -->
 				

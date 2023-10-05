@@ -21,6 +21,16 @@
 	</select>
 
 
+	<!-- 블로그 접속 시 진짜 있는 id인지 확인 -->
+	<select id="selectOneUserWithId" parameterType="String" resultType="com.javaex.vo.UserVo">
+		<![CDATA[
+			select  id,
+			        userName
+			from users
+			where id = #{id}
+		]]>
+	</select>
+
 
 </mapper>
 
