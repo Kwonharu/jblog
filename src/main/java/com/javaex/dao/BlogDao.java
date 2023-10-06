@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.javaex.vo.BlogVo;
 import com.javaex.vo.CategoryVo;
+import com.javaex.vo.PostVo;
 import com.javaex.vo.UserVo;
 
 @Repository
@@ -75,6 +76,14 @@ public class BlogDao {
 		count = sqlSession.delete("blog.deleteCategory", cateNo);
 		
 		return count; 
+	}
+	
+	
+	//post 추가
+	public int insertPost(PostVo postVo) {
+		System.out.println("BlogDao.insertPost()");
+		
+		return sqlSession.insert("blog.insertPost", postVo); 
 	}
 	
 	

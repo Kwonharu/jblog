@@ -17,6 +17,7 @@ import com.javaex.dao.BlogDao;
 import com.javaex.dao.UserDao;
 import com.javaex.vo.BlogVo;
 import com.javaex.vo.CategoryVo;
+import com.javaex.vo.PostVo;
 import com.javaex.vo.UserVo;
 
 @Service
@@ -136,6 +137,20 @@ public class BlogService {
 		
 		return blogDao.deleteCategory(cateNo);
 	}
+	
+
+	//post 추가
+	public int writePost(PostVo postVo) {
+		System.out.println("BlogService.writePost()");
+		
+		//제목 not null 처리 해야함
+		if(postVo.getPostTitle().equals(null)) {
+			return -1;
+		}
+		
+		return blogDao.insertPost(postVo);
+	}
+	
 	
 }
 

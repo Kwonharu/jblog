@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.javaex.service.BlogService;
 import com.javaex.vo.BlogVo;
 import com.javaex.vo.CategoryVo;
+import com.javaex.vo.PostVo;
 import com.javaex.vo.UserVo;
 
 @Controller
@@ -178,6 +179,16 @@ public class BlogController {
 		}
 
 	}
+	
+	//post
+	@RequestMapping(value="/{id}/admin/write", method={RequestMethod.GET, RequestMethod.POST})
+	public String write(@ModelAttribute PostVo postVo){
+		System.out.println("BlogController.write()");
+		
+		int count = blogService.writePost(postVo);
+		
+		return "redirect:/{id}";
+	}	
 	
 	
 }

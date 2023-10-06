@@ -74,6 +74,7 @@
 		]]>
 	</insert>
 	
+	<!-- 추가한 카테고리 가져오기 -->
 	<select id="selectOneCate" parameterType="int" resultType="com.javaex.vo.CategoryVo">
 		<![CDATA[
 			select  pos.rn cateRowNum,
@@ -98,13 +99,24 @@
 		]]>
 	</select>
 	
-		<!-- 카테고리 삭제 -->
+	<!-- 카테고리 삭제 -->
 	<delete id="deleteCategory" parameterType="int">
 		<![CDATA[
 			delete category
 			where cateNo = #{cateNo}
 		]]>
 	</delete>
+	
+	
+	<!-- post 추가 -->
+	<insert id="insertPost" parameterType="com.javaex.vo.PostVo">
+		<![CDATA[
+			insert into post
+			values(seq_post_no.nextval, #{cateNo}, #{postTitle}, #{postContent}, sysdate)
+		]]>
+	</insert>
+	
+	
 	
 	
 </mapper>

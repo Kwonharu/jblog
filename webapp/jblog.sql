@@ -196,7 +196,17 @@ insert into post
 values(seq_post_no.nextval, 6, '포스트 타이틀', '포스트 컨텐츠', sysdate);
 
 
+
+
+
+
+
+
+
+
+
 delete category;
+
 delete post;
 
 delete users
