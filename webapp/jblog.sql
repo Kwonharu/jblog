@@ -130,28 +130,34 @@ where id = 'aaa';
 
 --select category list
 select  pos.rn cateRowNum,
-        c.cateNo cateNo,
+        pos.cateNo cateNo,
         pos.coun postCount,
-        c.id id,
+        pos.id id,
         c.cateName cateName,
         c.description description,
         pos.reg regDate 
-from category c, blog b, (select  rownum rn,
-                                  p.cp coun,
-                                  p.cateNo cateNo,
-                                  p.reg reg
-                          from (select count(po.postNo) cp,
-                                       ca.cateNo cateNo,
-                                       ca.regDate reg
-                                from post po right outer join category ca
-                                on po.cateNo = ca.cateNo
-                                group by ca.cateNo, ca.regDate
-                                order by ca.regDate desc) p
-                          ) pos
-where c.id = b.id
-and pos.cateNo = c.cateNo
-and c.id = 'asd';
+from category c, (select rownum rn,
+                         p.cp coun,
+                         p.cateNo cateNo,
+                         p.reg reg,
+                         c.id id
+                  from category c,  blog b, (select count(po.postNo) cp,
+                                                    ca.cateNo cateNo,
+                                                    ca.regDate reg
+                                             from post po right outer join category ca
+                                             on po.cateNo = ca.cateNo
+                                             group by ca.cateNo, ca.regDate
+                                             order by ca.regDate asc) p
+                  where c.id = b.id
+                  and p.cateNo = c.cateNo
+                  and c.id = 'sua'
+                  ) pos
+where pos.cateNo = c.cateNo
+and c.id = 'sua';
 
+
+
+                   
           
 
 --insert cate
@@ -162,25 +168,29 @@ values(seq_category_no.nextval, 'asd', '카테고리 이름', '설명', sysdate)
 
 --selectOneCate
 select  pos.rn cateRowNum,
-        c.cateNo cateNo,
+        pos.cateNo cateNo,
         pos.coun postCount,
-        c.id id,
+        pos.id id,
         c.cateName cateName,
         c.description description,
-        c.regDate regDate 
-from category c, blog b, (select  rownum rn,
-                                  p.cp coun,
-                                  p.cateNo cateNo
-                          from (select count(po.postNo) cp,
-                                       ca.cateNo cateNo
-                                from post po right outer join category ca
-                                on po.cateNo = ca.cateNo
-                                group by ca.cateNo) p
-                         ) pos
-where c.id = b.id
-and pos.cateNo = c.cateNo
-and c.cateNo = 5
-order by c.regDate desc;
+        pos.reg regDate 
+from category c, (select rownum rn,
+                         p.cp coun,
+                         p.cateNo cateNo,
+                         p.reg reg,
+                         c.id id
+                  from category c,  blog b, (select count(po.postNo) cp,
+                                                    ca.cateNo cateNo,
+                                                    ca.regDate reg
+                                             from post po right outer join category ca
+                                             on po.cateNo = ca.cateNo
+                                             group by ca.cateNo, ca.regDate
+                                             order by ca.regDate asc) p
+                  where c.id = b.id
+                  and p.cateNo = c.cateNo
+                  ) pos
+where pos.cateNo = c.cateNo
+and c.cateNo = 10;
 
 
 
@@ -197,7 +207,16 @@ values(seq_post_no.nextval, 6, '포스트 타이틀', '포스트 컨텐츠', sys
 
 
 
-
+--select post list 카테고리 별
+select  p.postNo,
+        p.cateNo,
+        p.postTitle,
+        p.postContent,
+        p.regDate
+from post p, category c
+where c.cateNo = p.cateNo
+and c.id = 'asd'
+order by p.regDate;
 
 
 

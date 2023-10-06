@@ -34,12 +34,13 @@
 						<strong>카테고리</strong>
 					</div>
 					<ul id="cateList" class="text-left">
-						<li><a href="$}">카테고리5</a></li>
-						<li><a href="$}">카테고리4</a></li>
-						<li><a href="$}">카테고리3</a></li>
-						<li><a href="$}">카테고리2</a></li>
-						<li><a href="$}">카테고리1</a></li>
-						<li><a href="$}">미분류</a></li>
+						<c:forEach items="${requestScope.blogmap.cateList}" var="cateVo">
+							<li><a href="$}">${cateVo.cateName}</a></li>
+						</c:forEach>
+
+						<c:if test="${empty requestScope.blogmap.cateList}">
+							<li><a href="$}">미분류</a></li>
+						</c:if>
 						
 					</ul>
 				</div>
@@ -100,27 +101,12 @@
 							<col style="width: 20%;">
 						</colgroup>
 						
-						<tr>
-							<td class="text-left"><a href="">08.페이징</a></td>
-							<td class="text-right">2020/07/23</td>
-						</tr>
-						<tr>
-							<td class="text-left"><a href="">07.첨부파일_MultipartResolver</a></td>
-							<td class="text-right">2020/07/23</td>
-						</tr>
-						<tr>
-							<td class="text-left"><a href="">06.jquery_ajax</a></td>
-							<td class="text-right">2020/07/23</td>
-						</tr>
-						<tr>
-							<td class="text-left"><a href="">05.javaScript</a></td>
-							<td class="text-right">2020/07/23</td>
-						</tr>
-						<tr>
-							<td class="text-left"><a href="">04.spring_어플리케이션_아키텍쳐</a></td>
-							<td class="text-right">2020/07/23</td>
-						</tr>
-						
+						<c:forEach items="${requestScope.blogmap.cateList}" var="cateVo">
+							<tr>
+								<td class="text-left"><a href="">08.페이징</a></td>
+								<td class="text-right">2020/07/23</td>
+							</tr>
+						</c:forEach>
 						
 					</table>
 				</div>

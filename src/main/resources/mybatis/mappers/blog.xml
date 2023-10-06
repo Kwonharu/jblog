@@ -36,26 +36,29 @@
 	<select id="selectCateList" parameterType="String" resultType="com.javaex.vo.CategoryVo">
 		<![CDATA[
 			select  pos.rn cateRowNum,
-			        c.cateNo cateNo,
+			        pos.cateNo cateNo,
 			        pos.coun postCount,
-			        c.id id,
+			        pos.id id,
 			        c.cateName cateName,
 			        c.description description,
 			        pos.reg regDate 
-			from category c, blog b, (select  rownum rn,
-			                                  p.cp coun,
-			                                  p.cateNo cateNo,
-			                                  p.reg reg
-			                          from (select count(po.postNo) cp,
-			                                       ca.cateNo cateNo,
-			                                       ca.regDate reg
-			                                from post po right outer join category ca
-			                                on po.cateNo = ca.cateNo
-			                                group by ca.cateNo, ca.regDate
-			                                order by ca.regDate desc) p
-			                          ) pos
-			where c.id = b.id
-			and pos.cateNo = c.cateNo
+			from category c, (select rownum rn,
+			                         p.cp coun,
+			                         p.cateNo cateNo,
+			                         p.reg reg,
+			                         c.id id
+			                  from category c,  blog b, (select count(po.postNo) cp,
+			                                                    ca.cateNo cateNo,
+			                                                    ca.regDate reg
+			                                             from post po right outer join category ca
+			                                             on po.cateNo = ca.cateNo
+			                                             group by ca.cateNo, ca.regDate
+			                                             order by ca.regDate asc) p
+			                  where c.id = b.id
+			                  and p.cateNo = c.cateNo
+			                  and c.id = #{id}
+			                  ) pos
+			where pos.cateNo = c.cateNo
 			and c.id = #{id}
 		]]>
 	</select>
@@ -78,23 +81,28 @@
 	<select id="selectOneCate" parameterType="int" resultType="com.javaex.vo.CategoryVo">
 		<![CDATA[
 			select  pos.rn cateRowNum,
-			        c.cateNo cateNo,
+			        pos.cateNo cateNo,
 			        pos.coun postCount,
-			        c.id id,
+			        pos.id id,
 			        c.cateName cateName,
 			        c.description description,
-			        c.regDate regDate 
-			from category c, blog b, (select  rownum rn,
-			                                  p.cp coun,
-			                                  p.cateNo cateNo
-			                          from (select count(po.postNo) cp,
-			                                       ca.cateNo cateNo
-			                                from post po right outer join category ca
-			                                on po.cateNo = ca.cateNo
-			                                group by ca.cateNo) p
-			                         ) pos
-			where c.id = b.id
-			and pos.cateNo = c.cateNo
+			        pos.reg regDate 
+			from category c, (select rownum rn,
+			                         p.cp coun,
+			                         p.cateNo cateNo,
+			                         p.reg reg,
+			                         c.id id
+			                  from category c,  blog b, (select count(po.postNo) cp,
+			                                                    ca.cateNo cateNo,
+			                                                    ca.regDate reg
+			                                             from post po right outer join category ca
+			                                             on po.cateNo = ca.cateNo
+			                                             group by ca.cateNo, ca.regDate
+			                                             order by ca.regDate asc) p
+			                  where c.id = b.id
+			                  and p.cateNo = c.cateNo
+			                  ) pos
+			where pos.cateNo = c.cateNo
 			and c.cateNo = #{cateNo}
 		]]>
 	</select>
