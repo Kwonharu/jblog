@@ -46,24 +46,17 @@
 		      		</thead>
 		      		<tbody id="cateList">
 		      			<!-- 리스트 영역 -->
-		      			<tr>
-							<td>1</td>
-							<td>자바프로그래밍</td>
-							<td>7</td>
-							<td>자바기초와 객체지향</td>
-						    <td class='text-center'>
-						    	<img class="btnCateDel" src="${pageContext.request.contextPath}/assets/images/delete.jpg">
-						    </td>
-						</tr>
-						<tr>
-							<td>2</td>
-							<td>오라클</td>
-							<td>5</td>
-							<td>오라클 설치와 sql문</td>
-						    <td class='text-center'>
-						    	<img class="btnCateDel" src="${pageContext.request.contextPath}/assets/images/delete.jpg">
-						    </td>
-						</tr>
+		      			<c:forEach items="${requestScope.blogmap.cateList}" var="cateVo">
+							<tr>
+								<td>${cateVo.cateRowNum}</td>
+								<td>${cateVo.cateName}</td>
+								<td>${cateVo.postCount}</td>
+								<td>${cateVo.description}</td>
+						    	<td class='text-center'>
+						    		<img class="btnCateDel" src="${pageContext.request.contextPath}/assets/images/delete.jpg">
+						    	</td>
+							</tr>
+						</c:forEach>
 						<!-- 리스트 영역 -->
 					</tbody>
 				</table>

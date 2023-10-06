@@ -30,7 +30,34 @@
 			where id = #{id}
 		]]>
 	</update>
-
+	
+	
+	<!-- 카테고리 리스트 -->
+	<select id="selectCateList" parameterType="String" resultType="com.javaex.vo.CategoryVo">
+		<![CDATA[
+			select  pos.rn cateRowNum,
+			        c.cateNo cateNo,
+			        pos.coun postCount,
+			        c.id id,
+			        c.cateName cateName,
+			        c.description description,
+			        c.regDate regDate 
+			from category c, blog b, (select  rownum rn,
+			                                  p.co coun,
+			                                  p.cateNo cateNo
+			                          from (select count(po.postNo) co,
+			                                       ca.cateNo cateNo
+			                                from post po, category ca
+			                                where po.cateNo = ca.cateNo
+			                                group by ca.cateNo) p
+			                         ) pos
+			where c.id = b.id
+			and pos.cateNo = c.cateNo
+			and c.id = #{id}
+			order by c.regDate desc
+		]]>
+	</select>
+	
 </mapper>
 
 

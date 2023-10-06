@@ -31,8 +31,7 @@ public class UserDao {
 		return authUser;
 	}
 	
-	
-	//블로그 접속 시 진짜 있는 id인지 확인
+	//메인에 이름!!
 	public UserVo selectOneUserWithId(String id) {
 		System.out.println("UserDao.selectOneUserWithId()");
 		

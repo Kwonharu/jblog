@@ -128,12 +128,66 @@ where id = 'aaa';
 
 
 
+--select category list
+select  pos.rn cateRowNum,
+        c.cateNo cateNo,
+        pos.coun postCount,
+        c.id id,
+        c.cateName cateName,
+        c.description description,
+        c.regDate regDate 
+from category c, blog b, (select  rownum rn,
+                                  p.co coun,
+                                  p.cateNo cateNo
+                          from (select count(po.postNo) co,
+                                       ca.cateNo cateNo
+                                from post po, category ca
+                                where po.cateNo = ca.cateNo
+                                group by ca.cateNo) p
+                         ) pos
+where c.id = b.id
+and pos.cateNo = c.cateNo
+order by c.regDate desc;
+
+             
+
+
+                          
+                          
+
+
+--insert cate
+insert into category
+values(1, 'asd', '카테고리 이름', '설명', sysdate);
+
+insert into category
+values(2, 'asd', '카테고리 이름2', '설명2', sysdate);
+
+insert into category
+values(3, 'sua', '카테고리 이름s', '설명s', sysdate);
+
+
+--insert post
+insert into post
+values(1, 1, '포스트 타이틀', '포스트 컨텐츠', sysdate);
+
+insert into post
+values(2, 1, '포스트 타이틀2', '포스트 컨텐츠2', sysdate);
+
+insert into post
+values(5, 1, '포스트 타이틀1-2', '포스트 컨텐츠1-3', sysdate);
+
+insert into post
+values(3, 2, '2포스트 타이틀', '2포스트 컨텐츠', sysdate);
+
+insert into post
+values(4, 2, '2포스트 타이틀2', '2포스트 컨텐츠2', sysdate);
 
 
 
 
 delete users
-where userNo = 7;
+where userNo = 8;
 
 delete blog
 where id = 'a';
@@ -146,6 +200,12 @@ from users;
 
 select *
 from blog;
+
+select *
+from category;
+
+select *
+from post;
 
 
 commit;

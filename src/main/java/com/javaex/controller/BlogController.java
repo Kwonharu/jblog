@@ -51,7 +51,7 @@ public class BlogController {
 		System.out.println("BlogController.main()");
 		//System.out.println(id);
 		
-		Map<String, Object> blogmap = blogService.getOneUser(id);
+		Map<String, Object> blogmap = blogService.mainAdminBlog(id);
 
 		//id가 실제로 있는지
 		if((blogmap.get("blogVo")) == null) {
@@ -78,7 +78,7 @@ public class BlogController {
 			return "redirect:/user/loginForm";
 		//파라미터 id가 세션의 id와 같다면
 		}else if((id.equals(((UserVo) session.getAttribute("authUser")).getId()))){
-			Map<String, Object> blogmap = blogService.getOneUser(id);
+			Map<String, Object> blogmap = blogService.mainAdminBlog(id);
 			model.addAttribute("blogmap", blogmap);
 			return "blog/admin/blog-admin-basic";
 		//나가
@@ -114,7 +114,7 @@ public class BlogController {
 	}
 	
 		
-	//카테고리
+	//카테고리 페이지 + 리스트 출력
 	@RequestMapping(value="/{id}/admin/category", method={RequestMethod.GET, RequestMethod.POST})
 	public String category(@PathVariable(value="id") String id, Model model, HttpSession session){
 		System.out.println("BlogController.category()");
@@ -124,7 +124,7 @@ public class BlogController {
 			return "redirect:/user/loginForm";
 		//파라미터 id가 세션의 id와 같다면
 		}else if((id.equals(((UserVo) session.getAttribute("authUser")).getId()))){
-			Map<String, Object> blogmap = blogService.getOneUser(id);
+			Map<String, Object> blogmap = blogService.mainAdminBlog(id);
 			model.addAttribute("blogmap", blogmap);
 			return "blog/admin/blog-admin-cate";
 		//나가
@@ -132,6 +132,27 @@ public class BlogController {
 			return "error/403";
 		}
 	}	
+	
+	//카테고리 추가/삭제
+	@RequestMapping(value="/{id}/admin/categoryModify", method={RequestMethod.GET, RequestMethod.POST})
+	public String categoryModify(@PathVariable(value="id") String id, Model model, HttpSession session){
+		System.out.println("BlogController.categoryModify()");
+		
+		//이 조건 먼저 체크 안 하면 getId()할 때 오류남
+		if(session.getAttribute("authUser") == null) {
+			return "redirect:/user/loginForm";
+		//파라미터 id가 세션의 id와 같다면
+		}else if((id.equals(((UserVo) session.getAttribute("authUser")).getId()))){
+			
+			
+			
+			return "blog/admin/blog-admin-cate";
+		//나가
+		}else {
+			return "error/403";
+		}
+	}	
+	
 			
 	//글작성
 	@RequestMapping(value="/{id}/admin/writeForm", method={RequestMethod.GET, RequestMethod.POST})
@@ -143,7 +164,7 @@ public class BlogController {
 			return "redirect:/user/loginForm";
 		//파라미터 id가 세션의 id와 같다면
 		}else if((id.equals(((UserVo) session.getAttribute("authUser")).getId()))){
-			Map<String, Object> blogmap = blogService.getOneUser(id);
+			Map<String, Object> blogmap = blogService.mainAdminBlog(id);
 			model.addAttribute("blogmap", blogmap);
 			return "blog/admin/blog-admin-write";
 		//나가

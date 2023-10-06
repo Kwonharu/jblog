@@ -19,9 +19,9 @@
 			and password = #{password}
 		]]>
 	</select>
-
-
-	<!-- 블로그 접속 시 진짜 있는 id인지 확인 -->
+	
+	
+	<!-- 블로그 메인에 이름 나와야 함 -->
 	<select id="selectOneUserWithId" parameterType="String" resultType="com.javaex.vo.UserVo">
 		<![CDATA[
 			select  id,
@@ -30,7 +30,6 @@
 			where id = #{id}
 		]]>
 	</select>
-
 
 </mapper>
 
