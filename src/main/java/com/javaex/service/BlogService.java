@@ -114,6 +114,29 @@ public class BlogService {
 		return count;
 	}
 	
+	
+	//카테고리 추가
+	public CategoryVo categoryInsert(CategoryVo cateVo) {
+		System.out.println("BlogService.categoryInsert()");
+		
+		System.out.println(cateVo);
+		blogDao.insertCategory(cateVo);
+		System.out.println(cateVo);
+		
+		int no = cateVo.getCateNo();
+		
+		CategoryVo categoryVo = blogDao.selectOneCate(no);
+		
+		return categoryVo;
+	}
+	
+	//카테고리 삭제
+	public int categoryDelete(int cateNo) {
+		System.out.println("BlogService.categoryDelete()");
+		
+		return blogDao.deleteCategory(cateNo);
+	}
+	
 }
 
 

@@ -12,10 +12,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.javaex.service.BlogService;
 import com.javaex.vo.BlogVo;
+import com.javaex.vo.CategoryVo;
 import com.javaex.vo.UserVo;
 
 @Controller
@@ -133,24 +135,27 @@ public class BlogController {
 		}
 	}	
 	
-	//카테고리 추가/삭제
-	@RequestMapping(value="/{id}/admin/categoryModify", method={RequestMethod.GET, RequestMethod.POST})
-	public String categoryModify(@PathVariable(value="id") String id, Model model, HttpSession session){
-		System.out.println("BlogController.categoryModify()");
+	//카테고리 추가
+	@ResponseBody
+	@RequestMapping(value="/{id}/admin/categoryInsert", method={RequestMethod.GET, RequestMethod.POST})
+	public CategoryVo categoryInsert(@ModelAttribute CategoryVo cateVo){
+		System.out.println("BlogController.categoryInsert()");
+
+		CategoryVo categoryVo = blogService.categoryInsert(cateVo);
 		
-		//이 조건 먼저 체크 안 하면 getId()할 때 오류남
-		if(session.getAttribute("authUser") == null) {
-			return "redirect:/user/loginForm";
-		//파라미터 id가 세션의 id와 같다면
-		}else if((id.equals(((UserVo) session.getAttribute("authUser")).getId()))){
-			
-			
-			
-			return "blog/admin/blog-admin-cate";
-		//나가
-		}else {
-			return "error/403";
-		}
+		return categoryVo;
+
+	}	
+	
+	//카테고리 삭제
+	@ResponseBody
+	@RequestMapping(value="/{id}/admin/categoryDelete", method={RequestMethod.GET, RequestMethod.POST})
+	public int categoryDelete(@RequestParam(value="cateNo") int cateNo){
+		System.out.println("BlogController.categoryDelete()");
+		
+		int count = blogService.categoryDelete(cateNo);
+		
+		return count;
 	}	
 	
 			

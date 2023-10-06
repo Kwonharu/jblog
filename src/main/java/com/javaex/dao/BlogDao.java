@@ -47,10 +47,36 @@ public class BlogDao {
 		System.out.println("BlogDao.selectCateList()");
 		
 		List<CategoryVo> cateList = sqlSession.selectList("blog.selectCateList", id);
-		System.out.println(cateList);
+		//System.out.println(cateList);
 		
 		return cateList;
 	}
+	
+	//카테고리 추가
+	public int insertCategory(CategoryVo cateVo) {
+		System.out.println("BlogDao.insertCategory()");
+		
+		return sqlSession.insert("blog.insertCategory", cateVo);
+	}
+	
+	//1개 가져오기(insert한 거)
+	public CategoryVo selectOneCate(int no) {
+		System.out.println("BlogDao.selectOneCate()");
+		
+		return sqlSession.selectOne("blog.selectOneCate", no);
+	}
+	
+	//카테고리 삭제
+	public int deleteCategory(int cateNo) {
+		System.out.println("BlogDao.deleteCategory()");
+		
+		int count = -1;
+		
+		count = sqlSession.delete("blog.deleteCategory", cateNo);
+		
+		return count; 
+	}
+	
 	
 }
 
