@@ -54,7 +54,7 @@ public class BlogService {
 		if(file.isEmpty() == false) {
 
 			//파일 저장 디렉토리
-			String saveDir = "C:\\javaStudy\\upload";
+			String saveDir = "C:\\javaStudy\\jblog_file";
 			
 			//오리지널 파일 명
 			String orgName = file.getOriginalFilename();

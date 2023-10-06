@@ -44,7 +44,7 @@
 	
 	
 	<!-- url매핑-->
-	<mvc:resources mapping="/upload/**" location="file:C:/javaStudy/upload/" />
+	<mvc:resources mapping="/jblog_file/**" location="file:C:/javaStudy/jblog_file/" />
 	
 </beans>
 

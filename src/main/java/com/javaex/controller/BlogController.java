@@ -53,7 +53,8 @@ public class BlogController {
 		
 		Map<String, Object> blogmap = blogService.getOneUser(id);
 
-		if((blogmap.get("userVo")) == null) {
+		//id가 실제로 있는지
+		if((blogmap.get("blogVo")) == null) {
 			return "error/403";
 		}else {
 			model.addAttribute("blogmap", blogmap);

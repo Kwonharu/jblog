@@ -22,7 +22,7 @@
 				<div id="profile">
 					
 					<!-- 기본이미지 -->
-					<img id="proImg" src="${pageContext.request.contextPath}/upload/${requestScope.blogmap.blogVo.logoFile}">
+					<img id="proImg" src="${pageContext.request.contextPath}/jblog_file/${requestScope.blogmap.blogVo.logoFile}">
 					
 					<!-- 사용자업로드 이미지 -->
 					<%-- <img id="proImg" src=""> --%>
