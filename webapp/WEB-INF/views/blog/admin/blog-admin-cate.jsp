@@ -207,7 +207,7 @@ $("#cateList").on("click", ".btnCateDel", function(){
 
 			if(count != -1){
 				
-				//fetchList();
+				//rownum 안 쓰고 번호를 따로 관리하면 리스트만 새로 불러오는 거 ajax로 처리할 수 있을 거 같은데
 				
 				//새로고침 해주는 함수
 				document.location.reload(true);

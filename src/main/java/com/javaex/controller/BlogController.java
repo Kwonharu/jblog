@@ -43,7 +43,7 @@ public class BlogController {
 			return "blog/admin/blog-admin-"+where;
 		//나가
 		}else {
-			return "error/403";
+			return "redirect:/error";
 		}
 	}
 	*/
@@ -87,7 +87,7 @@ public class BlogController {
 			return "blog/admin/blog-admin-basic";
 		//나가
 		}else {
-			return "error/403";
+			return "redirect:/error";
 		}
 	}
 	
@@ -113,7 +113,7 @@ public class BlogController {
 			return "redirect:/{id}";
 		//나가
 		}else {
-			return "error/403";
+			return "redirect:/error";
 		}
 	}
 	
@@ -133,7 +133,7 @@ public class BlogController {
 			return "blog/admin/blog-admin-cate";
 		//나가
 		}else {
-			return "error/403";
+			return "redirect:/error";
 		}
 	}	
 	
@@ -188,7 +188,7 @@ public class BlogController {
 			return "blog/admin/blog-admin-write";
 		//나가
 		}else {
-			return "error/403";
+			return "redirect:/error";
 		}
 
 	}
@@ -203,6 +203,14 @@ public class BlogController {
 		return "redirect:/{id}";
 	}	
 	
+	
+	//에러 페이지 링크
+	@RequestMapping(value="/error", method={RequestMethod.GET, RequestMethod.POST})
+	public String error(){
+		System.out.println("BlogController.error()");
+		
+		return "error/403";
+	}	
 	
 }
 

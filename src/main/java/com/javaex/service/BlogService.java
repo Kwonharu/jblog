@@ -41,12 +41,16 @@ public class BlogService {
 		BlogVo blogVo = blogDao.selectOneBlogWithId(id);
 		//System.out.println(blogVo);
 		
-
+		//카테고리 리스트
+		List<CategoryVo> cateList = blogDao.selectCateList(id);
+		
+		
 		Map<String, Object> blogmap = new HashMap<String, Object>();
 
 		blogmap.put("userVo", userVo);
 		blogmap.put("blogVo", blogVo);
-
+		blogmap.put("cateList", cateList);
+		
 		return blogmap;
 	}
 	

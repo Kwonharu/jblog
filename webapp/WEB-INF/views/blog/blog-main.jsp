@@ -35,11 +35,11 @@
 					</div>
 					<ul id="cateList" class="text-left">
 						<c:forEach items="${requestScope.blogmap.cateList}" var="cateVo">
-							<li><a href="$}">${cateVo.cateName}</a></li>
+							<li><a href="">${cateVo.cateName}</a></li>
 						</c:forEach>
 
 						<c:if test="${empty requestScope.blogmap.cateList}">
-							<li><a href="$}">미분류</a></li>
+							<li><a href="${pageContext.request.contextPath}/error">미분류</a></li>
 						</c:if>
 						
 					</ul>
