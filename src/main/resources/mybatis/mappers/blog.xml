@@ -60,6 +60,7 @@
 			                  ) pos
 			where pos.cateNo = c.cateNo
 			and c.id = #{id}
+			order by pos.rn desc
 		]]>
 	</select>
 	
@@ -78,7 +79,7 @@
 	</insert>
 	
 	<!-- 추가한 카테고리 가져오기 -->
-	<select id="selectOneCate" parameterType="int" resultType="com.javaex.vo.CategoryVo">
+	<select id="selectOneCate" parameterType="com.javaex.vo.CategoryVo" resultType="com.javaex.vo.CategoryVo">
 		<![CDATA[
 			select  pos.rn cateRowNum,
 			        pos.cateNo cateNo,
@@ -101,9 +102,12 @@
 			                                             order by ca.regDate asc) p
 			                  where c.id = b.id
 			                  and p.cateNo = c.cateNo
+			                  and c.id = #{id}
 			                  ) pos
 			where pos.cateNo = c.cateNo
-			and c.cateNo = #{cateNo}
+			and c.id = #{id}
+			and pos.cateNo = #{cateNo}
+			order by pos.rn desc
 		]]>
 	</select>
 	

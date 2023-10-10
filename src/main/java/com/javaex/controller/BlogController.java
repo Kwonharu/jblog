@@ -1,5 +1,6 @@
 package com.javaex.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -136,6 +137,17 @@ public class BlogController {
 		}
 	}	
 	
+	//카테고리 리스트 출력 (ajax)
+	@ResponseBody
+	@RequestMapping(value="/{id}/admin/categoryList", method={RequestMethod.GET, RequestMethod.POST})
+	public List<CategoryVo> categoryList(@PathVariable(value="id") String id){
+		System.out.println("BlogController.categoryInsert()");
+
+		List<CategoryVo> categoryList = blogService.categoryList(id);
+		
+		return categoryList;
+	}	
+	
 	//카테고리 추가
 	@ResponseBody
 	@RequestMapping(value="/{id}/admin/categoryInsert", method={RequestMethod.GET, RequestMethod.POST})
@@ -151,7 +163,8 @@ public class BlogController {
 	//카테고리 삭제
 	@ResponseBody
 	@RequestMapping(value="/{id}/admin/categoryDelete", method={RequestMethod.GET, RequestMethod.POST})
-	public int categoryDelete(@RequestParam(value="cateNo") int cateNo){
+	public int categoryDelete(@PathVariable(value="id") String id,
+							  @RequestParam(value="cateNo") int cateNo){
 		System.out.println("BlogController.categoryDelete()");
 		
 		int count = blogService.categoryDelete(cateNo);

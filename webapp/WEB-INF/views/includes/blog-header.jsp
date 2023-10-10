@@ -5,7 +5,7 @@
 		<div id="header" class="clearfix">
 			
 			<!-- 일반 페이지 제목 기본값 -->
-			<h1><a href="">${requestScope.blogmap.blogVo.blogTitle}</a></h1>
+			<h1><a href="${pageContext.request.contextPath}/${sessionScope.authUser.id}">${requestScope.blogmap.blogVo.blogTitle}</a></h1>
 			
 			<ul class="clearfix">
 			

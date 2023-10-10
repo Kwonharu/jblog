@@ -61,10 +61,10 @@ public class BlogDao {
 	}
 	
 	//1개 가져오기(insert한 거)
-	public CategoryVo selectOneCate(int no) {
+	public CategoryVo selectOneCate(CategoryVo cateVo) {
 		System.out.println("BlogDao.selectOneCate()");
 		
-		return sqlSession.selectOne("blog.selectOneCate", no);
+		return sqlSession.selectOne("blog.selectOneCate", cateVo);
 	}
 	
 	//카테고리 삭제

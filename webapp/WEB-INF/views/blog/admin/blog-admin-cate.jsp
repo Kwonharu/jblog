@@ -46,8 +46,9 @@
 			      		</tr>
 		      		</thead>
 		      		<tbody id="cateList">
+		      		
 		      			<!-- 리스트 영역 -->
-		      			<c:forEach items="${requestScope.blogmap.cateList}" var="cateVo">
+		      			<%-- <c:forEach items="${requestScope.blogmap.cateList}" var="cateVo">
 							<tr id="catelist${cateVo.cateNo}">
 								<td>${cateVo.cateRowNum}</td>
 								<td>${cateVo.cateName}</td>
@@ -57,8 +58,9 @@
 						    		<img class="btnCateDel" data-no="${cateVo.cateNo}" data-post="${cateVo.postCount}" src="${pageContext.request.contextPath}/assets/images/delete.jpg">
 						    	</td>
 							</tr>
-						</c:forEach>
+						</c:forEach> --%>
 						<!-- 리스트 영역 -->
+						
 					</tbody>
 				</table>
       	
@@ -98,6 +100,38 @@
 
 <script type="text/javascript">
 
+//DOM이 완성되었을 때 --> 그리기 직전
+$(document).ready(()=>{
+	fetchList();
+});
+
+
+//카테고리 리스트 출력
+function fetchList(){
+
+	$.ajax({
+		url : "${pageContext.request.contextPath}/${blogmap.blogVo.id}/admin/categoryList",		
+		type : "post",
+		
+		dataType : "json",
+		success : function(categoryList){
+			/*성공시 처리해야될 코드 작성*/
+			console.log(categoryList);
+			
+			for(let i=0; i<categoryList.length; i++){
+				render(categoryList[i], "down");
+			}
+			
+		},
+		error : function(XHR, status, error) {
+			console.error(status + " : " + error);
+		}
+	});
+
+}
+
+
+
 //카테고리 추가 버튼 클릭 시
 $("#btnAddCate").on("click", ()=>{
 	
@@ -130,7 +164,8 @@ $("#btnAddCate").on("click", ()=>{
 		dataType : "json",
 		success : function(categoryVo){
 			console.log(categoryVo);
-			render(categoryVo);
+			render(categoryVo, "up");
+			
 			$("#input-cateName").val("");
 			$("#input-cateDesc").val("");
 		},
@@ -171,7 +206,14 @@ $("#cateList").on("click", ".btnCateDel", function(){
 			console.log(count);
 
 			if(count != -1){
-				$("#catelist"+no).remove();
+				
+				//fetchList();
+				
+				//새로고침 해주는 함수
+				document.location.reload(true);
+				
+				//이렇게 지우면 rownum 갱신이 안 됨
+				//$("#catelist"+no).remove();
 			}else{
 				alert("오류");
 			}
@@ -186,7 +228,7 @@ $("#cateList").on("click", ".btnCateDel", function(){
 
 
 
-function render(cateVo){
+function render(cateVo, dir){
 	
 	let str = "";
 	str += "<tr id='catelist"+cateVo.cateNo+"'>";
@@ -195,11 +237,17 @@ function render(cateVo){
 	str += "	<td>"+cateVo.postCount+"</td>";
 	str += "	<td>"+cateVo.description+"</td>";
 	str += "	<td class='text-center'>";
-	str += "		<img class='btnCateDel' data-no='"+cateVo.cateNo+"' data-no='"+cateVo.postCount+"' src='${pageContext.request.contextPath}/assets/images/delete.jpg'>";
+	str += "		<img class='btnCateDel' data-no='"+cateVo.cateNo+"' data-post='"+cateVo.postCount+"' src='${pageContext.request.contextPath}/assets/images/delete.jpg'>";
 	str += "	</td>";
 	str += "</tr>";
 	
-	$("#cateList").prepend(str);
+	if(dir == "up"){
+		$("#cateList").prepend(str);
+		
+	}else if(dir == "down"){
+		$("#cateList").append(str);	
+	
+	}
 };
 
 

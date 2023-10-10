@@ -41,15 +41,11 @@ public class BlogService {
 		BlogVo blogVo = blogDao.selectOneBlogWithId(id);
 		//System.out.println(blogVo);
 		
-		//카테고리 리스트
-		List<CategoryVo> cateList = blogDao.selectCateList(id);
-		//System.out.println(cateList);
-		
+
 		Map<String, Object> blogmap = new HashMap<String, Object>();
 
 		blogmap.put("userVo", userVo);
 		blogmap.put("blogVo", blogVo);
-		blogmap.put("cateList", cateList);
 
 		return blogmap;
 	}
@@ -116,17 +112,23 @@ public class BlogService {
 	}
 	
 	
+	//카테고리 리스트
+	public List<CategoryVo> categoryList(String id) {
+	
+		List<CategoryVo> cateList = blogDao.selectCateList(id);
+	
+		return cateList;
+	}
+	
 	//카테고리 추가
 	public CategoryVo categoryInsert(CategoryVo cateVo) {
 		System.out.println("BlogService.categoryInsert()");
 		
-		System.out.println(cateVo);
+		//System.out.println(cateVo);
 		blogDao.insertCategory(cateVo);
-		System.out.println(cateVo);
+		//System.out.println(cateVo);
 		
-		int no = cateVo.getCateNo();
-		
-		CategoryVo categoryVo = blogDao.selectOneCate(no);
+		CategoryVo categoryVo = blogDao.selectOneCate(cateVo);
 		
 		return categoryVo;
 	}

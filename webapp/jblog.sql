@@ -150,10 +150,11 @@ from category c, (select rownum rn,
                                              order by ca.regDate asc) p
                   where c.id = b.id
                   and p.cateNo = c.cateNo
-                  and c.id = 'sua'
+                  and c.id = 'asd'
                   ) pos
 where pos.cateNo = c.cateNo
-and c.id = 'sua';
+and c.id = 'asd'
+order by pos.rn desc;
 
 
 
@@ -188,9 +189,12 @@ from category c, (select rownum rn,
                                              order by ca.regDate asc) p
                   where c.id = b.id
                   and p.cateNo = c.cateNo
+                  and c.id = 'asd'
                   ) pos
 where pos.cateNo = c.cateNo
-and c.cateNo = 10;
+and c.id = 'asd'
+and pos.cateNo = 25
+order by pos.rn desc;
 
 
 
